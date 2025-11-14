@@ -1,5 +1,6 @@
 package com.multitech.FileHandler.controller;
 
+import com.multitech.FileHandler.DTO.AlunoDTO;
 import com.multitech.FileHandler.domain.Aluno;
 import com.multitech.FileHandler.service.AlunoService;
 import jakarta.persistence.EntityNotFoundException;
@@ -22,8 +23,9 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<Aluno> create(@RequestBody Aluno aluno) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(alunoService.save(aluno));
+    public ResponseEntity<Aluno> create(@RequestBody AlunoDTO dto) {
+        Aluno aluno = alunoService.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(aluno);
     }
 
     @GetMapping("/{id}")
