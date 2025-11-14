@@ -1,0 +1,27 @@
+CREATE TABLE livro (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    nome VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE curso (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    nome VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE livro_curso (
+    id_curso BIGINT NOT NULL,
+    id_livro BIGINT NOT NULL,
+    PRIMARY KEY (id_curso, id_livro),
+    FOREIGN KEY (id_curso) REFERENCES curso(id),
+    FOREIGN KEY (id_livro) REFERENCES livro(id)
+);
+
+CREATE TABLE aluno (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    nome VARCHAR(200) NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    senha VARCHAR(200) NOT NULL,
+    salt BYTEA,
+    id_curso BIGINT NOT NULL,
+    FOREIGN KEY (id_curso) REFERENCES curso(id)
+);
