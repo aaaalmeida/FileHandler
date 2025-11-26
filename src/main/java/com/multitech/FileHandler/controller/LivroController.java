@@ -37,7 +37,6 @@ public class LivroController {
 
     @GetMapping("/curso/{cursoId}")
     public ResponseEntity<List<Livro>> findLivroByCursoId(@PathVariable Long cursoId) {
-        logger.info(cursoId.toString());
         return ResponseEntity.ok(livroService.findByIdCurso(cursoId));
     }
 
