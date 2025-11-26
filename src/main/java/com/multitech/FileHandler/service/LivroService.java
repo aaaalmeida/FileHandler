@@ -42,10 +42,7 @@ public class LivroService{
     }
 
     public List<Livro> findByIdCurso(Long idCurso) {
-        Livro l = new Livro();
-        l.setCursos(new HashSet(Arrays.asList(idCurso)));
-        Example<Livro> example = Example.of(l);
-        return livroRepository.findAll(example);
+        return livroRepository.findByCursoId(idCurso);
     }
 
     public void deleteLivroById(Long id) {

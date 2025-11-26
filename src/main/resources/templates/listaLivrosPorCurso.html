@@ -8,11 +8,11 @@
     <form>
         <label for="idCurso">SELECIONE O CURSO</label>
         <select id="idCurso" name="idCurso">
+            <option value="">Selecione...</option>
             <option th:each="curso : ${cursos}"
-                    th:text="${curso.nome}"
                     th:value="${curso.id}"
-                    th:selected="${curso.id == cursoId}"
-            >
+                    th:text="${curso.nome}"
+                    th:selected="${curso.id == cursoId}">
             </option>
         </select>
     </form>
@@ -21,17 +21,19 @@
     <ul>
         <li th:each="livro : ${livros}">
             <a th:href="@{'/livro/download/' + ${livro.id}}"
-               th:text="${livro.nome}"></a>
+               th:text="${livro.nome}">
+            </a>
         </li>
     </ul>
+
+    <script>
+        document.getElementById("idCurso").addEventListener("change", function () {
+            const selectedId = this.value
+            if (selectedId) {
+                window.location.href = "/livro/curso/" + selectedId;
+            }
+        })
+    </script>
 </body>
 
-<script>
-    document.getElementById("idCurso").addEventListener("change", function () {
-        const selectedId = this.value
-        if (selectedId) {
-            window.location.href = "/curso/" + selectedId;
-        }
-    })
-</script>
 </html>
