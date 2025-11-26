@@ -1,10 +1,14 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>Add CSS and JS to Thymeleaf</title>
+    <link th:href="@{/style/main.css}" rel="stylesheet" />
 </head>
 <body>
-<p>Get your greeting <a href="/greeting">here</a></p>
+<h2>Carefully Styled Heading</h2>
+<p>
+    This is text on which we want to apply <strong>very special</strong> styling.
+</p>
 </body>
 </html>

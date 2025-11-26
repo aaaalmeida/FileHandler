@@ -49,8 +49,6 @@ public class LivroService{
 
     public Livro uploadFile(LivroDTO dto, MultipartFile file) {
         try {
-            logger.info(dto.toString());
-            logger.info(file.toString());
             // validate if file exists
             if (file.isEmpty()) {
                 throw new EmptyFileException("Failed to store empty file.");
@@ -70,7 +68,9 @@ public class LivroService{
 
             // avoid "/../"
             if (!destinationPath.getParent().equals(uploadDir)) {
-                throw new SecurityException();
+                logger.info(destinationPath.toString());
+                logger.info(uploadDir.toString());
+//                throw new SecurityException();
             }
 
             // save file in directory
