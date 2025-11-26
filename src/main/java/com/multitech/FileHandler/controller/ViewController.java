@@ -1,0 +1,40 @@
+package com.multitech.FileHandler.controller;
+
+import com.multitech.FileHandler.repository.CursoRepository;
+import com.multitech.FileHandler.repository.LivroRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/view")
+public class ViewController {
+    @Autowired
+    private CursoRepository cursoRepository;
+    @Autowired
+    private LivroRepository livroRepository;
+
+    @GetMapping("/livro")
+    public String findAllLivro(Model model) {
+        model.addAttribute("livros", livroRepository.findAll());
+        return "listaLivros";
+    }
+
+    @GetMapping("/livro/curso")
+    public String findLivroByCursoId(Model model) {
+        model.addAttribute("cursos", cursoRepository.findAll());
+        model.addAttribute("livros", List.of());
+        model.addAttribute("cursoId", null);
+        return "listaLivrosPorCurso";
+    }
+
+    @GetMapping("/curso")
+    public String findAllCurso(Model model) {
+        model.addAttribute("cursos", cursoRepository.findAll());
+        return "listaCursos";
+    }
+}

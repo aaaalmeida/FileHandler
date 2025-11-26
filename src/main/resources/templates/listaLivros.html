@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mostrar Livros</title>
+</head>
+<body>
+    <h2>TODOS LIVROS</h2>
+    <ul>
+        <li th:each="livro : ${livros}">
+            <a th:href="@{'/livro/download/' + ${livro.id}}"
+               th:text="${livro.nome}">
+            </a>
+        </li>
+    </ul>
+</body>
+</html>

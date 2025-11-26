@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +36,11 @@ public class LivroController {
         return ResponseEntity.status(HttpStatus.OK).body(livro);
     }
 
+    @GetMapping("/curso/{id}")
+    public ResponseEntity<List<Livro>> findLivroByCursoId(@PathVariable Long cursoId) {
+        return ResponseEntity.ok(livroService.findByIdCurso(cursoId));
+    }
+
     @DeleteMapping("/{id}")
     public void deleteLivroById(@PathVariable Long id) {
         livroService.deleteLivroById(id);
@@ -42,12 +48,10 @@ public class LivroController {
 
     @PostMapping(
       value="/upload",
-      consumes=MediaType.MULTIPART_FORM_DATA_VALUE
-      )
+      consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Livro> uploadFile(
             @RequestPart("file") MultipartFile file,
-            @RequestPart("dto") LivroDTO dto) {
-//        logger.info(dto.toString());
+            @ModelAttribute LivroDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(livroService.uploadFile(dto, file));
     }
 
@@ -60,4 +64,16 @@ public class LivroController {
                         "attachment; filename=\"" + file.getFilename() + "\"")
                 .body(file);
     }
+
+//    @PostMapping(
+//        value = "/add",
+//        consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+//    )
+//    public String upload(
+//        @RequestParam("nome") String nome,
+//        @RequestParam("file") MultipartFile file) {
+//            logger.info(nome);
+//            logger.info(file.getName());
+//            return "ok";
+//    }
 }

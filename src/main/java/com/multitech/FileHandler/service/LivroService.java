@@ -13,16 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class LivroService{
@@ -43,12 +41,21 @@ public class LivroService{
         return livroRepository.findById(id);
     }
 
+    public List<Livro> findByIdCurso(Long idCurso) {
+        Livro l = new Livro();
+        l.setCursos(new HashSet(Arrays.asList(idCurso)));
+        Example<Livro> example = Example.of(l);
+        return livroRepository.findAll(example);
+    }
+
     public void deleteLivroById(Long id) {
         livroRepository.deleteById(id);
     }
 
     public Livro uploadFile(LivroDTO dto, MultipartFile file) {
         try {
+            logger.info(dto.toString());
+            logger.info(file.toString());
             // validate if file exists
             if (file.isEmpty()) {
                 throw new EmptyFileException("Failed to store empty file.");
