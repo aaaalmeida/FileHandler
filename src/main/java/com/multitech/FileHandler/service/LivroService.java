@@ -29,9 +29,7 @@ public class LivroService{
     @Autowired
     private CursoRepository cursoRepository;
     private static Logger logger = LoggerFactory.getLogger(LivroService.class);
-
-    private final String home = System.getProperty("user.home");
-    private final Path uploadDir = Paths.get(home, "Documents", "ebooks");
+    private final Path uploadDir = Paths.get("ebooks");
 
     public List<Livro> listAll() {
         return livroRepository.findAll();
