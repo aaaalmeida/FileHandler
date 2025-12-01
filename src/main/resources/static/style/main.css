@@ -6,6 +6,7 @@ form {
     border: 1px solid black;
     border-radius: 10px;
     gap: 2px;
+    margin: 0 auto;
 }
 
 ul {
