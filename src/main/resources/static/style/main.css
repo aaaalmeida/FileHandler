@@ -1,4 +1,9 @@
+div{
+    margin: 20px auto 0;
+}
+
 form {
+    margin: 20px auto 0;
     padding: 20px;
     display: flex;
     width: 20%;
@@ -6,7 +11,6 @@ form {
     border: 1px solid black;
     border-radius: 10px;
     gap: 2px;
-    margin: 0 auto;
 }
 
 ul {

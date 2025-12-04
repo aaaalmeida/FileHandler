@@ -7,12 +7,13 @@
 </head>
 
 <body>
-<h2>TODOS CURSOS</h2>
-<ul>
-    <li th:each="curso : ${cursos}">
-        <span th:text="${curso.nome}">
-        </span>
-    </li>
-</ul>
+    <a href="/">Retornar para a página inicial</a>
+    <h2>TODOS CURSOS</h2>
+    <ul>
+        <li th:each="curso : ${cursos}">
+            <span th:text="${curso.nome}">
+            </span>
+        </li>
+    </ul>
 </body>
 </html>
