@@ -26,4 +26,9 @@ public class FormController {
     public String formAddCurso(Model model) {
         return "addCursoForm";
     }
+
+    @GetMapping("/login")
+    public String formLogin(Model model) {
+        return "login";
+    }
 }

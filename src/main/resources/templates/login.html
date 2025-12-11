@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Livro</title>
+    <link th:href="@{/style/main.css}" rel="stylesheet" />
+</head>
+<body>
+<a href="/">Retornar para a página inicial</a>
+<form th:action="@{/auth/login}" method="post">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="username" required />
+    <br>
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="password" required />
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>

@@ -27,7 +27,7 @@ public class LivroService{
     private LivroRepository livroRepository;
     @Autowired
     private CursoRepository cursoRepository;
-    private static Logger logger = LoggerFactory.getLogger(LivroService.class);
+    private static final Logger logger = LoggerFactory.getLogger(LivroService.class);
     private final Path uploadDir = Paths.get("ebooks");
 
     public List<Livro> listAll() {
@@ -90,8 +90,6 @@ public class LivroService{
     }
 
     public Resource downloadFile(Long id) {
-        logger.warn("DOWNLOAD FILE ID"+ id);
-
         Livro livro = livroRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         logger.warn(livro.toString());
         try {
@@ -104,18 +102,6 @@ public class LivroService{
             return resource;
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    public void init() {
-        try {
-            Files.createDirectory(uploadDir);
-        } catch (IOException e) {
-            if (e instanceof FileAlreadyExistsException) {
-                logger.warn("Already created directory");
-                return;
-            }
-            throw new RuntimeException("Failed to create directory", e);
         }
     }
 }

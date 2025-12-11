@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
@@ -92,6 +93,22 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+                .body(er);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentialsException(BadCredentialsException e, HttpServletRequest request) {
+        ErrorResponse er = new ErrorResponse(
+                "UNAUTHORIZED",
+                HttpStatus.UNAUTHORIZED, // 401
+                e.getMessage(),
+                request.getRequestURI(),
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(er);
     }
