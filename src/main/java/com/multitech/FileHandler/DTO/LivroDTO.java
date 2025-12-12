@@ -10,5 +10,4 @@ public record LivroDTO(
         String  nome,
         @NotEmpty
         Set<Long> idCurso
-) {
-}
+) { }

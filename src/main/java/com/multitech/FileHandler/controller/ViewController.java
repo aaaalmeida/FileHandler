@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/view")
 public class ViewController {
@@ -22,22 +20,20 @@ public class ViewController {
     @GetMapping("/livro")
     public String findAllLivro(Model model) {
         model.addAttribute("livros", livroService.listAll());
+        model.addAttribute("cursoId", null);
+        return "listaLivros";
+    }
+
+    @GetMapping("/livro/curso/{id}")
+    public String findLivroByCursoId(@PathVariable Long id,  Model model) {
+        model.addAttribute("livros", livroService.findByIdCurso(id));
+        model.addAttribute("cursoId", id);
         return "listaLivros";
     }
 
     @GetMapping("/livro/curso")
     public String findLivroByCurso(Model model) {
         model.addAttribute("cursos", cursoRepository.findAll());
-        model.addAttribute("livros", List.of());
-        model.addAttribute("cursoId", null);
-        return "listaLivrosPorCurso";
-    }
-
-    @GetMapping("/livro/curso/{id}")
-    public String findLivroByCursoId(@PathVariable Long id,  Model model) {
-        model.addAttribute("cursos", cursoRepository.findAll());
-        model.addAttribute("livros", livroService.findByIdCurso(id));
-        model.addAttribute("cursoId", id);
         return "listaLivrosPorCurso";
     }
 

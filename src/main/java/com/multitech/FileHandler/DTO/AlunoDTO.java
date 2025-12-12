@@ -5,5 +5,4 @@ public record AlunoDTO(
         String  email,
         String  senha,
         Long    idCurso
-) {
-}
+) { }

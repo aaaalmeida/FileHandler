@@ -7,35 +7,12 @@
 </head>
 <body>
     <a href="/">Retornar para a página inicial</a>
-    <form>
-        <label for="idCurso">SELECIONE O CURSO</label>
-        <select id="idCurso" name="idCurso">
-            <option value="">Selecione...</option>
-            <option th:each="curso : ${cursos}"
-                    th:value="${curso.id}"
-                    th:text="${curso.nome}"
-                    th:selected="${curso.id == cursoId}">
-            </option>
-        </select>
-    </form>
-
-    <h2>LIVROS ENCONTRADOS</h2>
     <ul>
-        <li th:each="livro : ${livros}">
-            <a th:href="@{'/livro/download/' + ${livro.id}}"
-               th:text="${livro.nome}">
+        <li th:each="curso : ${cursos}">
+            <a th:href="@{'/view/livro/curso/' + ${curso.id}}"
+               th:text="${curso.nome}">
             </a>
         </li>
     </ul>
-
-    <script>
-        document.getElementById("idCurso").addEventListener("change", function () {
-            const selectedId = this.value
-            if (selectedId) {
-                window.location.href = "/livro/curso/" + selectedId;
-            }
-        })
-    </script>
 </body>
-
 </html>

@@ -7,10 +7,12 @@
 </head>
 <body>
     <a href="/">Retornar para a página inicial</a>
-    <h2>TODOS LIVROS</h2>
+    <h2 th:if="${cursoId == null}">TODOS OS LIVROS</h2>
+    <h2 th:if="${cursoId != null}" th:text="'LIVROS DO CURSO ' + ${cursoId}"></h2>
     <ul>
         <li th:each="livro : ${livros}">
             <a th:href="@{'/livro/download/' + ${livro.id}}"
+               target="_blank"
                th:text="${livro.nome}">
             </a>
         </li>

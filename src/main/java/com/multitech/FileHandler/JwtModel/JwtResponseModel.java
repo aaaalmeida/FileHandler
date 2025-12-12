@@ -1,4 +1,3 @@
 package com.multitech.FileHandler.JwtModel;
 
-public record JwtResponseModel(String token) {
-}
+public record JwtResponseModel(String token) { }

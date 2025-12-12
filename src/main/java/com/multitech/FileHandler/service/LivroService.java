@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
 
@@ -69,7 +68,7 @@ public class LivroService{
             if (!destinationPath.getParent().equals(uploadDir)) {
                 logger.info(destinationPath.toString());
                 logger.info(uploadDir.toString());
-//                throw new SecurityException();
+                throw new SecurityException("Invalid file name.");
             }
 
             // save file in directory

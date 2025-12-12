@@ -4,7 +4,6 @@ import com.multitech.FileHandler.DTO.LivroDTO;
 import com.multitech.FileHandler.domain.Livro;
 import com.multitech.FileHandler.service.LivroService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,8 +66,7 @@ public class LivroController {
         Resource file = livroService.downloadFile(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_PDF)
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION,"inline; filename=\"" + file.getFilename() + ".pdf\"")
                 .body(file);
     }
 }
