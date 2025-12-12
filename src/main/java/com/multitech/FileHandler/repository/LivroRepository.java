@@ -9,4 +9,6 @@ import java.util.List;
 public interface LivroRepository extends JpaRepository<Livro, Long> {
     @Query("SELECT l FROM Livro l JOIN l.cursos c WHERE c.id = :cursoId")
     List<Livro> findByCursoId(Long cursoId);
+
+    boolean existsByNome(String name);
 }
