@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import java.nio.file.NoSuchFileException;
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
@@ -52,6 +53,22 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleIllegalFileFormat(IllegalFileFormatException e, HttpServletRequest request) {
         ErrorResponse er = new ErrorResponse(
                 "ILLEGAL FILE FORMAT",
+                HttpStatus.BAD_REQUEST, // 400
+                e.getMessage(),
+                request.getRequestURI(),
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+                .body(er);
+    }
+
+    @ExceptionHandler(NoSuchFileException.class)
+    public ResponseEntity<ErrorResponse> handleNoSuchFile(NoSuchFileException e, HttpServletRequest request) {
+        ErrorResponse er = new ErrorResponse(
+                "ILLEGAL FILE NAME",
                 HttpStatus.BAD_REQUEST, // 400
                 e.getMessage(),
                 request.getRequestURI(),

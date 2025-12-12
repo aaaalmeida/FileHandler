@@ -3,6 +3,7 @@ package com.multitech.FileHandler.controller;
 import com.multitech.FileHandler.JwtModel.JwtRequestModel;
 import com.multitech.FileHandler.securityConfig.JwtUtil;
 import com.multitech.FileHandler.service.AdminDetailsService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
+    @Operation(summary = "Login - gera e salva jwt em cookies para rotas POST e DELETE")
     public ResponseEntity<?> createToken(@ModelAttribute JwtRequestModel model) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(model.username(), model.password()));

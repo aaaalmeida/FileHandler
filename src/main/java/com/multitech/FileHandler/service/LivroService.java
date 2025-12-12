@@ -26,8 +26,10 @@ public class LivroService{
     private LivroRepository livroRepository;
     @Autowired
     private CursoRepository cursoRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(LivroService.class);
-    private final Path uploadDir = Paths.get("ebooks");
+
+    private final Path uploadDir = Paths.get("ebooks").toAbsolutePath().normalize();
 
     public List<Livro> listAll() {
         return livroRepository.findAll();
@@ -65,7 +67,7 @@ public class LivroService{
             Path destinationPath = uploadDir.resolve(dto.nome()).normalize().toAbsolutePath();
 
             // avoid "/../"
-            if (!destinationPath.getParent().equals(uploadDir)) {
+            if (!destinationPath.startsWith(uploadDir)) {
                 logger.info(destinationPath.toString());
                 logger.info(uploadDir.toString());
                 throw new SecurityException("Invalid file name.");
