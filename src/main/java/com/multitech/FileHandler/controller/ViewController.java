@@ -28,6 +28,12 @@ public class ViewController {
     public String findLivroByCursoId(@PathVariable Long id,  Model model) {
         model.addAttribute("livros", livroService.findByIdCurso(id));
         model.addAttribute("cursoId", id);
+
+        // not my proudest code :(
+        String cursoNome = cursoRepository.findById(id)
+                .map(curso -> curso.getNome().toUpperCase()).orElse("");
+
+        model.addAttribute("cursoNome", cursoNome);
         return "listaLivros";
     }
 
