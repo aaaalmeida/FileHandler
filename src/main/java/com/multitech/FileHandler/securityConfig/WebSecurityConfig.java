@@ -31,6 +31,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/livro/**").authenticated()
 //                        .requestMatchers("/swagger-ui/**").permitAll()
 //                        .requestMatchers("/api-docs").permitAll()
                         .anyRequest().authenticated())
